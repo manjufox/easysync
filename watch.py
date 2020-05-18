@@ -61,4 +61,4 @@ if __name__ == "__main__":
     # tasks = [asyncio.create_task()
     print("\nsession start\n")
     print(f"{pathlist}")
-    asyncio.run(session.main(multiobserver))
+    asyncio.run(session.multistart(multiobserver))
