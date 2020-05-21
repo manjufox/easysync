@@ -62,16 +62,7 @@ class sync():
             asyncio.run(self.gather())
         else:
             future = asyncio.run_coroutine_threadsafe(self.gather(), loop)
-        print(f"session start")
         return future
-
-
-async def coro():
-    i = 0
-    while True:
-        i = i + 1
-        await asyncio.sleep(1)
-        print(f"time : {i+1}")
 
 
 if __name__ == "__main__":
@@ -83,15 +74,3 @@ if __name__ == "__main__":
 
     sync = sync(pathlist, recursive=True)
     sync.run()
-
-    # session = multiobserver(pathlist=pathlist)
-    # handler = session.handler()
-    # observer = session.observer()
-    # session.scheduler(handler=handler,
-    #                        observer=observer, recursive=True)
-
-    # loop = asyncio.get_event_loop()
-    # # tasks = [asyncio.create_task()
-    # print("\nsession start\n")
-    # print(f"{pathlist}")
-    # asyncio.run(session.multistart(observer))
