@@ -9,6 +9,7 @@ class EventHandler(PatternMatchingEventHandler):
 
     def on_created(self, event):
         print(f"CREATED : {event.src_path}")
+        
 
     def on_modified(self, event):
         print(f"MODIFIED : {event.src_path}")
