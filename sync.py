@@ -32,12 +32,8 @@ class multiobserver():
 
     async def start(self, observer):
         observer.start()
-        try:
-            while True:
-                await asyncio.sleep(1)
-        except KeyboardInterrupt:
-            observer.stop()
-        observer.join()
+        while True:
+            await asyncio.sleep(1)
 
 
 class sync():
@@ -59,15 +55,11 @@ class sync():
     async def gather(self):
         tasks = [self.multiobserver.start(
             self.observers[i]) for i in range(len(self.observers))]
-        return await asyncio.gather(*tasks, self._print("SESSION START"))
+        return await asyncio.gather(*tasks)
 
-    def run(self, loop=None):
-        if loop is None:
-            loop = asyncio.get_event_loop()
-            asyncio.run(self.gather())
-        else:
-            future = asyncio.run_coroutine_threadsafe(self.gather(), loop)
-        return future
+    def run(self):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.gather())
 
 
 if __name__ == "__main__":
@@ -76,6 +68,5 @@ if __name__ == "__main__":
         testpath = Path(path)/f"test{i}"
         testpath.mkdir(exist_ok=True)
     pathlist = list(glob.glob(f"{path}/*"))
-
     sync = sync(pathlist, recursive=True)
     sync.run()
