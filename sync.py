@@ -51,6 +51,11 @@ class sync():
     async def _print(self, words):
         print(words)
 
+    async def tasks(self):
+        while True:
+            await asyncio.sleep(1)
+            print(asyncio.all_tasks())
+
     async def gather(self):
         tasks = [self.multiobserver.start(
             self.observers[i]) for i in range(len(self.observers))]
