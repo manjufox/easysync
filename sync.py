@@ -70,3 +70,4 @@ if __name__ == "__main__":
     pathlist = list(glob.glob(f"{path}/*"))
     sync = sync(pathlist, recursive=True)
     sync.run()
+    print("done")
